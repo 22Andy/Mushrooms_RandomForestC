@@ -1,0 +1,25 @@
+FROM python:3.8
+
+
+COPY main.py .
+COPY mean.npy .
+COPY std.npy .
+COPY RandomF_hongos.pickle .
+
+RUN pip install -U scikit-learn
+RUN pip install FastAPI uvicorn
+
+EXPOSE 8500
+CMD ["python3", "main.py"]%  
+
+# Para crear la imagen de docker
+# NOS PONEMOS EN LA DIRECCION DONDE SE ENCUENTRE NUESTRO ARCHIVO dockerfile
+# docker build -t randomforesthongos .
+# docker run -d -p 8500:8500 --name randomforest randomforesthonrgos
+#curl -X POST "http://localhost:8500/predict/5/3/8/1/0/1/0/0/5/0/2/2/2/7/7/2/1/4/3/2/1"
+
+
+# para subir el Docker a Docker Hub
+# 1.- creamos el repositorio en el sitio web
+# 2.- docker tag randomforesthongos:randomforet andreaek/randomforesthongos:tagname
+# 3.- docker push andreaek/randomforesthongos:tagname 
